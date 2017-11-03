@@ -1,0 +1,12 @@
+<TokenDefs>
+	<Def>
+	<!--This is a comment-->
+		<Name>This</Name>
+		<Attribute>Thing</Attribute>
+		<Attribute>New</Attribute>
+	</Def>
+	<Def>
+		<Name>That</Name>
+		<Attribute>Yaknow</Attribute>
+	</Def>
+</TokenDefs>

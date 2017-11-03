@@ -1,0 +1,9 @@
+Launcher/wxWidgets/**
+Launcher/rapidxml/**
+Launcher/wxWidgets
+Launcher/rapidxml
+
+*.o
+*.exe
+*.dll
+sample.cpp

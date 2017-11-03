@@ -1,0 +1,29 @@
+Main Frame:
+	Init Page:
+		Initialization options for the game, nothing affecting raws.
+		Contents:
+			Launch options
+			Save settings
+			Graphics & TWBT controls (leave space for later)
+			Embark settings
+			
+			
+	Races Page:
+		Controls how the races operate. Organized like a table.
+		Contents:
+			Active/Inactive
+			Fortress Mode
+			Adventurer Mode
+			Aggression (not implemented until Toady gives us the power to anger other civs)
+			
+	Mods Page:
+		Not necessarily functional, but informative.
+		Contents:
+			List of all additional mods implemented.
+
+
+
+Launcher Bar
+	Launch DF
+	Manual
+	About
