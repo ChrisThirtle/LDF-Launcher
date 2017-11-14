@@ -3,8 +3,9 @@
 // ============================================================================
 
 #include "launcher.h"
-#include "wx/xrc/xmlres.h"
 
+#define CONTROLS_LIST {"wxRadioButton","wxButton","wxCheckBox"}
+#define XML_SOURCE "Test.xrc"
 // ============================================================================
 // implementation
 // ============================================================================
@@ -13,20 +14,13 @@
 // the application class
 // ----------------------------------------------------------------------------
 
-// the event tables connect the wxWidgets events with the functions (event
-// handlers) which process them. It can be also done at run-time, but for the
-// simple menu events like this the static method is much simpler.
-wxBEGIN_EVENT_TABLE(LauncherFrame, wxFrame)
-    EVT_MENU(Minimal_Quit,  LauncherFrame::OnQuit)
-    EVT_MENU(Minimal_About, LauncherFrame::OnAbout)
-wxEND_EVENT_TABLE()
-
 // Create a new application object: this macro will allow wxWidgets to create
 // the application object during program execution (it's better than using a
 // static object for many reasons) and also implements the accessor function
 // wxGetApp() which will return the reference of the right type (i.e. Launcher and
 // not wxApp)
 IMPLEMENT_APP(Launcher)
+
 
 bool Launcher::OnInit()
 {
@@ -35,11 +29,24 @@ bool Launcher::OnInit()
 		
 	
 	wxXmlResource::Get()->InitAllHandlers();
-	wxXmlResource::Get()->Load("Test.xrc");
+	wxXmlResource::Get()->Load(XML_SOURCE);
 	
-    LauncherFrame *frame = new LauncherFrame("Minimal wxWidgets App");
+    LauncherFrame *frame = new LauncherFrame("Legendary Dwarf Fortress");
     frame->Show(true);
 	
+
+	/*wxList* controls = Launcher::getControls(frame); //Get the list of controls
+	
+	std::ofstream log("log.txt");
+	
+	const wxXmlNode* node;
+	for(wxObjectList::iterator i = controls->begin();
+		i != controls->end();
+		i++){
+		node = XmlParser::getMeta(((wxControl*)*i)->GetName());
+		if(node != NULL) log << node->GetParent()->GetName() + " " + node->GetParent()->GetAttribute("name","unnamed") + "\n" + node->GetNodeContent() + "\n\n";
+	}
+	*/
     return true;
 }
 
@@ -48,57 +55,152 @@ bool Launcher::OnInit()
 LauncherFrame::LauncherFrame(const wxString& title)
        : wxFrame(NULL, wxID_ANY, title)
 {
-	wxGridSizer *page;
-	wxXmlResource::Get()->LoadObject(page, this,"Init","wxGridSizer");
-	//SetSizerAndFit(page);
-/*
-	#if wxUSE_MENUS
-		// create a menu bar
-		wxMenu *fileMenu = new wxMenu;
-
-		// the "About" item should be in the help menu
-		wxMenu *helpMenu = new wxMenu;
-		helpMenu->Append(Minimal_About, "&About\tF1", "Show about dialog");
-
-		fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
-
-		// now append the freshly created menu to the menu bar...
-		wxMenuBar *menuBar = new wxMenuBar();
-		menuBar->Append(fileMenu, "&File");
-		menuBar->Append(helpMenu, "&Help");
-
-		// ... and attach this menu bar to the frame
-		SetMenuBar(menuBar);
-	#endif // wxUSE_MENUS
-
-	#if wxUSE_STATUSBAR
-		// create a status bar just for fun (by default with 1 pane only)
-		CreateStatusBar(1);
-		SetStatusText("Welcome to wxWidgets!");
-	#endif // wxUSE_STATUSBAR
-*/
+	wxSize framesz;
+	menu = new wxPanel(this);
+	options = new wxPanel(this);
+	
+	wxBoxSizer *layout = new wxBoxSizer(wxHORIZONTAL);
+	
+	layout->Add(menu,0,wxEXPAND);
+	layout->AddSpacer(10);
+	layout->Add(options,1,wxEXPAND);
+	
+	this->SetSizer(layout);
+	
+	wxVector <wxPanel*> pages;
+	
+	/*
+	Left side menu
+	*/
+	wxBoxSizer *menulayout = new wxBoxSizer(wxVERTICAL);
+	menu->SetSizer(menulayout);
+	
+	
+	//Launch DF button
+	const char iconArr[] = {0x81, 0x7E, 0x7E, 0x5A, 0x7E, 0x00, 0x24, 0x00, 0x81, 0xC7, 0xCF};
+						// {0x7E, 0x81, 0x81, 0xA5, 0x81, 0xFF, 0xDB, 0x7E, 0x1C, 0x0C};
+	
+	const wxBitmap *dfIcon = new wxBitmap(iconArr,8,11);
+	wxImage dfImage = dfIcon->ConvertToImage();
+	delete dfIcon;
+	dfImage = dfImage.Size(wxSize(dfImage.GetWidth()+2,dfImage.GetHeight()+2),wxPoint(1,1),0,0,0);
+	dfImage.Rescale(dfImage.GetWidth()*5,dfImage.GetHeight()*5);
+	dfIcon = new wxBitmap(dfImage);
+	
+	wxBitmapButton *dfButton = new wxBitmapButton(menu,wxID_ANY,*dfIcon);
+	dfButton->Bind(wxEVT_LEFT_DOWN,&LauncherFrame::LaunchDF,this);
+	menulayout->Add(dfButton, wxALIGN_CENTER_HORIZONTAL);
+	
+	
+	//Mod option pages controls
+	const wxXmlNode *menuoptions = wxXmlResource::Get()->GetResourceNode("Start");
+	for(menuoptions = menuoptions->GetNext();
+		menuoptions != NULL;
+		menuoptions = menuoptions->GetNext() )
+	{
+			wxButton *b = new wxButton(menu,wxID_ANY,menuoptions->GetAttribute("name","NULL"));
+			menulayout->Add(b, wxALIGN_CENTER_HORIZONTAL);
+			b->Show(true);
+			b->Bind(wxEVT_LEFT_DOWN,&LauncherFrame::MenuButtonHandler,this);
+	}
+	
+	
+	
+	
+	//LDF Logo
+	wxImage::AddHandler(new wxPNGHandler);
+	wxBitmap ldfLogo;
+	ldfLogo.LoadFile(LEGENDARY_LOGO_PATH, wxBITMAP_TYPE_PNG);
+	DrawPanel *logoSpace = new DrawPanel(this, ldfLogo);
+	
+	menulayout->Add(logoSpace, wxALIGN_CENTER_HORIZONTAL);
+	logoSpace->Show(true);
+	
+	
+	
+	menulayout->Fit(menu);
+	framesz.IncTo(menulayout->ComputeFittingWindowSize(this));
+	
+	/*
+	Right side, mod options
+	*/
+	menuoptions = wxXmlResource::Get()->GetResourceNode("Start");
+	for(menuoptions = menuoptions->GetNext();
+		menuoptions != NULL;
+		menuoptions = menuoptions->GetNext() )
+	{
+		wxPanel *page = wxXmlResource::Get()->LoadPanel(options, menuoptions->GetAttribute("name","NULL"));
+		page->Show(true);
+		framesz.IncTo(page->GetSizer()->ComputeFittingWindowSize(this));
+		framesz.IncTo(layout->ComputeFittingWindowSize(this));
+		page->Show(false);
+		pages.push_back(page);
+	}
+	
+	menu->Show(true);
+	options->Show(true);
+	pages.at(0)->Show(true);
+	this->SetMinSize(framesz);
+	this->SetMaxSize(framesz);
+	this->SetSize(framesz);
 }
 
-// event handlers
-
-void LauncherFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
-{
-    // true is to force the frame to close
-    Close(true);
+void LauncherFrame::MenuButtonHandler(wxEvent& e){
+	wxButton *b = dynamic_cast<wxButton*>(e.GetEventObject());
+	wxWindow *selectedpage = this->options->FindWindow(b->GetLabel());
+	wxWindowList pages = this->options->GetChildren();
+	if(selectedpage != NULL) {
+		for(wxWindowList::iterator i = pages.begin();
+			i != pages.end();
+			i++)
+			(*i)->Show(false);
+		selectedpage->Show(true);
+	}
+	this->Layout();
+	e.Skip();
 }
 
-void LauncherFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
-{
-    wxMessageBox(wxString::Format
-                 (
-                    "Welcome to %s!\n"
-                    "\n"
-                    "This is the minimal wxWidgets sample\n"
-                    "running under %s.",
-                    wxVERSION_STRING,
-                    wxGetOsDescription()
-                 ),
-                 "About wxWidgets minimal sample",
-                 wxOK | wxICON_INFORMATION,
-                 this);
+void LauncherFrame::LaunchDF(wxEvent& e){
+	e.Skip();
 }
+
+
+
+wxList* Launcher::getControls(wxWindow* win) {
+	wxList* list = new wxList();
+	getControls(list,win);
+	return list;
+}
+wxList* Launcher::getControls(wxSizer* win) {
+	wxList* list = new wxList();
+	getControls(list,win);
+	return list;
+}
+void Launcher::getControls(wxList* list, wxSizer* win){
+    if(win == NULL or list == NULL)
+		return;
+		
+	wxSizerItemList kids = win->GetChildren();
+	for(wxSizerItemList::iterator i = kids.begin();
+		 i != kids.end();
+		 i++) {
+		if((*i)->IsWindow()) getControls(list,(*i)->GetWindow());
+		else if((*i)->IsSizer()) getControls(list,(*i)->GetSizer());
+		}
+    return;
+}
+void Launcher::getControls(wxList* list, wxWindow* win){
+	if(win == NULL or list == NULL) return;
+    if(dynamic_cast<wxControl*>(win)) {
+        list->Append(win);
+    }
+    else {
+		wxWindowList kids = win->GetChildren();
+		for(wxWindowList::iterator i = kids.begin();
+             i != kids.end();
+             i++) 
+            getControls(list,*i);
+    }
+    return;
+}
+

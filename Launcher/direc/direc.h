@@ -28,7 +28,7 @@ namespace Directory {
 			~Iterator();							//Closes any dir items and returns to the original directory
 			
 			std::string getNextFilename();			//Gets the name of the next file in the directory
-													//Throws std::out_of_range exception at end of file.
+													//Throws std::out_of_range exception at end of directory.
 			
 			std::string getDirPath();				//Returns the full path to the current directory
 			

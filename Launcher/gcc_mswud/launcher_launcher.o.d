@@ -239,7 +239,14 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  wxWidgets\include/wx/msw/mdi.h wxWidgets\include/wx/xrc/xmlres.h \
  wxWidgets\include/wx/filesys.h wxWidgets\include/wx/filename.h \
  wxWidgets\include/wx/file.h wxWidgets\include/wx/convauto.h \
- wxWidgets\include/wx/artprov.h wxWidgets\include/wx/xrc/xmlreshandler.h
+ wxWidgets\include/wx/artprov.h wxWidgets\include/wx/xrc/xmlreshandler.h \
+ xmlparser.h wxWidgets\include/wx/xml/xml.h drawpanel.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/fstream \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/codecvt.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/basic_file.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++io.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/fstream.tcc
 
 launcher.h:
 
@@ -1024,3 +1031,21 @@ wxWidgets\include/wx/convauto.h:
 wxWidgets\include/wx/artprov.h:
 
 wxWidgets\include/wx/xrc/xmlreshandler.h:
+
+xmlparser.h:
+
+wxWidgets\include/wx/xml/xml.h:
+
+drawpanel.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/fstream:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/codecvt.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/basic_file.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++io.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/fstream.tcc:

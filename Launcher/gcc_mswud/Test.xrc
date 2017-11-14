@@ -1,78 +1,185 @@
 <?xml version="1.0" ?>
 <resource version="2.3.0.1">
-	<object class="wxObject" name="Templates">
+	<object name="Templates">
 		<object class="wxCheckBox" name="CBtemplate">
 			<size>80,8d</size>
 			<fg>#f0f0f0</fg>
 			<bg>#0f0f0f</bg>
-			<flag>wxEXPAND | wxALL</flag>
 			<border>2</border>
 			<label>template</label>
 			<checked>0</checked>
 			<meta>
-				<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
-				<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+				<regex>(\[prefix\][\S\s]\[template:)\d+(?=[\:\d]+\])</regex>
+				<repstr>\1$value</repstr>
 			</meta>
 		</object>
 		<object class="wxRadioButton" name="RBtemplate">
 			<size>80,8d</size>
 			<fg>#f0f0f0</fg>
 			<bg>#0f0f0f</bg>
-			<flag>wxEXPAND | wxALL</flag>
 			<border>2</border>
 			<label>template</label>
 			<value>0</value>
 			<meta>
-				<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
-				<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+				<regex>(\[prefix\][\S\s]\[template:)\d+(?=[\:\d]+\])</regex>
+				<repstr>\1$value</repstr>
 			</meta>
 		</object>
+		
+		<object class="wxSpinCtrl" name="SCtemplate">
+			<size>80,8d</size>
+			<fg>#f0f0f0</fg>
+			<bg>#0f0f0f</bg>
+			<border>2</border>
+			<label>template</label>
+			<value>0</value>
+			<meta>
+				<regex>(\[prefix\][\S\s]\[template:)\d+(?=[\:\d]+\])</regex>
+				<repstr>\1$value</repstr>
+			</meta>
+		</object>
+		
 		<object class="wxButton" name="BUtemplate">
 			<size>80,12d</size>
 			<fg>#f0f0f0</fg>
 			<bg>#0f0f0f</bg>
-			<flag>wxEXPAND | wxALL</flag>
 			<border>2</border>
 			<label>template</label>
 		</object>
 	</object>
 	
-	<object class="wxGridSizer" name="Init">
-		<rows>3</rows>
-		<object class="sizeritem">
-			<object_ref ref="CBtemplate">
-				<label>Not template</label>
-			</object_ref>
+	
+	<object name="Start" />
+	<object class="wxPanel" name="Init">
+		<object class="wxGridSizer">
+			<rows>3</rows>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Not template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="BUtemplate" name="2temp">
+					<label>2 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="BUtemplate" name="2temp">
+					<label>2 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="BUtemplate" name="2temp">
+					<label>2 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="BUtemplate" name="2temp">
+					<label>2 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate">
+					<label>3 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate" name="item1">
+					<label>4 template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate" name="item1">
+					<label>4 template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Not template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Not template</label>
+				</object_ref>
+			</object>
 		</object>
-		<object class="sizeritem">
-			<object_ref ref="BUtemplate" name="item1">
-				<label>2 template</label>
-			</object_ref>
-		</object>
-		<object class="sizeritem">
-			<object_ref ref="RBtemplate">
-				<label>3 template</label>
-			</object_ref>
-		</object>
-		<object class="sizeritem">
-			<object_ref ref="RBtemplate" name="item1">
-				<label>4 template</label>
-			</object_ref>
-		</object>
-		<object class="sizeritem">
-			<object_ref ref="RBtemplate" name="item1">
-				<label>4 template</label>
-			</object_ref>
-		</object>
-		<object class="sizeritem">
-			<object_ref ref="CBtemplate">
-				<label>Not template</label>
-			</object_ref>
-		</object>
-		<object class="sizeritem">
-			<object_ref ref="CBtemplate">
-				<label>Not template</label>
-			</object_ref>
+	</object>
+		
+	<object class="wxPanel" name="Races">
+		<object class="wxGridSizer">
+			<rows>3</rows>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Templateatatatatatatate</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="BUtemplate" name="2temp">
+					<label>2 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate">
+					<label>3 template</label>
+					<meta>
+						<on>(\\[prefix\\][.|\\s]*)\\[(template\\])</on>
+						<off>(\\[prefix\\][.|\\s]*)\\!(template\\])</off>
+					</meta>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate" name="item1">
+					<label>4 template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="RBtemplate" name="item1">
+					<label>4 template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Not template</label>
+				</object_ref>
+			</object>
+			<object class="sizeritem">
+				<object_ref ref="CBtemplate">
+					<label>Not template</label>
+				</object_ref>
+			</object>
 		</object>
 	</object>
 </resource>

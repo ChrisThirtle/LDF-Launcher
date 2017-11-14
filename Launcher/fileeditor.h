@@ -7,10 +7,14 @@
 #include <regex>
 #include <mutex>
 #include <future>
+#include <thread>
+#include <chrono>
 #include <queue>
 #include <deque>
 
 #include "direc/direc.h"
+#include "xmlparser.h"
+#include "switch.h"
 
 class EditorManager {
 	private:
