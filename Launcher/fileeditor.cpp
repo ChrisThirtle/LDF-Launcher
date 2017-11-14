@@ -1,11 +1,10 @@
 #include "fileeditor.h"
 
-#define RAWS_PATH
-#define INIT_PATH
+#define RAWS_PATH "stuff"
+#define INIT_PATH "thing"
 
 #if LDFTHREADED==0 //Single threaded file editing, first implementation
-EditorManager::EditorManager(std::future f, *MutexVector<HalfSwitch> editsource) {
-	endManager = f;
+EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitch> *editsource) {
 	Directory::Iterator dir;
 	std::vector<std::string> files;
 	
@@ -14,27 +13,27 @@ EditorManager::EditorManager(std::future f, *MutexVector<HalfSwitch> editsource)
 	try {
 		while(true){
 			std::string filepath = dir.getDirPath() + dir.getNextFilename();
-			if(filepath.compare(string.length()-4,string::npos,".txt") == 0) //If filepath leads to a .txt file
+			if(filepath.compare(filepath.length()-4,std::string::npos,".txt") == 0) //If filepath leads to a .txt file
 				files.push_back(filepath);									 //Add to file list
 		}
 	}
-	catch (std::out_of_range e);
+	catch (std::out_of_range e){};
 	dir.home();
 	dir.changeDirectory(INIT_PATH);
 	try {
 		while(true){
 			std::string filepath = dir.getDirPath() + dir.getNextFilename();
-			if(filepath.compare(string.length()-4,string::npos,".txt") == 0) //If filepath leads to a .txt file
+			if(filepath.compare(filepath.length()-4,std::string::npos,".txt") == 0) //If filepath leads to a .txt file
 				files.push_back(filepath);									 //Add to file list
 		}
 	}
-	catch (std::out_of_range e);
+	catch (std::out_of_range e){};
 	
 	//Collect the full switches for the controls;
 	std::vector<FullSwitch> editdest;
-	editsource.AcquireLock();
-	for(std::vector<HalfSwitch>::iterator it = editsource.begin();
-		it != editsource.end();
+	editsource->AcquireLock();
+	for(std::vector<HalfSwitch>::iterator it = editsource->begin();
+		it != editsource->end();
 		it++){
 		std::string regexstring = "";
 		std::string replacestring = "";
@@ -51,19 +50,19 @@ EditorManager::EditorManager(std::future f, *MutexVector<HalfSwitch> editsource)
 		editdest.emplace_back((*it),targetfile,regexstring,replacestring);
 		}
 	}
-	editsource.ReleaseLock();
+	editsource->ReleaseLock();
 	
 	//Begin editing files in loop
 	std::vector<FullSwitch> editdiffs;
-	while(endManager.wait_for(0) != future_status::ready){ //While you've not been told to exit, edit files
+	while(endManager.wait_for(std::chrono::seconds::zero()) != std::future_status::ready){ //While you've not been told to exit, edit files
 	
-		editsource.AcquireLock();							//Lock switch list
+		editsource->AcquireLock();							//Lock switch list
 		for(int it = 0; it < editdest.size(); it++){		//For each switch
-			if(not editsource[it].Equals(editdest[it])		//Compare current switches to previous switches
+			if(not (*editsource)[it].Equals(editdest[it]))		//Compare current switches to previous switches
 				editdiffs.emplace_back(editdest[it]);		//Put the differences in a list
-				editdest[it].ival = editsource[it].ival;	//Merge differences to the old list
+				editdest[it].ival = (*editsource)[it].ival;	//Merge differences to the old list
 		}
-		editsource.ReleaseLock();							//Release switch list lock
+		editsource->ReleaseLock();							//Release switch list lock
 		
 		
 		for(std::vector<std::string>::iterator it = files.begin();	//For each file to be edited
@@ -73,21 +72,24 @@ EditorManager::EditorManager(std::future f, *MutexVector<HalfSwitch> editsource)
 			std::string filetext;
 			
 			//Read file contents
-			currfile.open(*it,ios_base::in);
+			currfile.open(*it,std::ios_base::in);
 			std::copy(std::istream_iterator<char>(currfile),
 			     	  std::istream_iterator<char>(),
-				      std::back_inserter(this->filetext));
+				      std::back_inserter(filetext));
 			currfile.close();
+			
+			wxString fstring(filetext);
 			
 			//Modify file contents
 			for(std::vector<FullSwitch>::iterator control = editdiffs.begin();
-				control = editdiffs.end();
+				control != editdiffs.end();
 				control++){
-				regstr.ReplaceAll(filetext,(*control).repstr)
+				(*control).regstr.ReplaceAll(&fstring,wxString((*control).repstr));
 			
+			filetext = fstring.ToStdString();
 			//Rewrite file
-			currfile.open(*lt,ios_base::out | ios_base::trunc);
-			currfile.write(filetext);
+			currfile.open(*it,std::ios_base::out | std::ios_base::trunc);
+			currfile << filetext;
 			currfile.close();
 			} //End for
 		} //End for
@@ -96,6 +98,7 @@ EditorManager::EditorManager(std::future f, *MutexVector<HalfSwitch> editsource)
 
 #elif LDFTHREADED==1 //Simple multithreading, not too smart
 #elif LDFTHREADED==2 //Smart multithreading
+/*
 EditorManager::EditorManager(std::future f) {
 	futur = f;
 	//Set up MutexQueues and FileEditors for each file
@@ -190,3 +193,5 @@ bool MutexQueue::isEmpty() {
 	std::lock_guard<std::mutex> lock(q_mutex)
 	return q.empty();
 }
+*/
+#endif

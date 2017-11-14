@@ -256,6 +256,8 @@ $(OBJS)\drawpanel_drawpanel.o: .\drawpanel.cpp
 $(OBJS)\switch_switch.o: .\switch.cpp
 	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
 	
+$(OBJS)\files_files.o: .\fileeditor.cpp
+	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) -std=c++11 $<
 .PHONY: all clean
 
 
