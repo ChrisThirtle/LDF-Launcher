@@ -34,19 +34,6 @@ bool Launcher::OnInit()
     LauncherFrame *frame = new LauncherFrame("Legendary Dwarf Fortress");
     frame->Show(true);
 	
-
-	/*wxList* controls = Launcher::getControls(frame); //Get the list of controls
-	
-	std::ofstream log("log.txt");
-	
-	const wxXmlNode* node;
-	for(wxObjectList::iterator i = controls->begin();
-		i != controls->end();
-		i++){
-		node = XmlParser::getMeta(((wxControl*)*i)->GetName());
-		if(node != NULL) log << node->GetParent()->GetName() + " " + node->GetParent()->GetAttribute("name","unnamed") + "\n" + node->GetNodeContent() + "\n\n";
-	}
-	*/
     return true;
 }
 
@@ -77,10 +64,9 @@ LauncherFrame::LauncherFrame(const wxString& title)
 	
 	
 	//Launch DF button
-	const char iconArr[] = {0x81, 0x7E, 0x7E, 0x5A, 0x7E, 0x00, 0x24, 0x00, 0x81, 0xC7, 0xCF};
-						// {0x7E, 0x81, 0x81, 0xA5, 0x81, 0xFF, 0xDB, 0x7E, 0x1C, 0x0C};
+	const unsigned char iconArr[] = {0x81, 0x7E, 0x7E, 0x5A, 0x7E, 0x00, 0x24, 0x00, 0x81, 0xC7, 0xCF};
 	
-	const wxBitmap *dfIcon = new wxBitmap(iconArr,8,11);
+	const wxBitmap *dfIcon = new wxBitmap((char*)iconArr,8,11);
 	wxImage dfImage = dfIcon->ConvertToImage();
 	delete dfIcon;
 	dfImage = dfImage.Size(wxSize(dfImage.GetWidth()+2,dfImage.GetHeight()+2),wxPoint(1,1),0,0,0);
@@ -137,13 +123,48 @@ LauncherFrame::LauncherFrame(const wxString& title)
 		pages.push_back(page);
 	}
 	
-	menu->Show(true);
-	options->Show(true);
-	pages.at(0)->Show(true);
+	/*
+	Processing for all controls
+	Get validators set up for everyone, basically
+	*/
+	wxList* modControls = Launcher::getControls(options);
+	validatorSwitches = new MutexVector<HalfSwitch*>();
+	
+	validatorSwitches->AcquireLock();
+	validatorSwitches->reserve(modControls->GetCount());
+	
+	std::vector<HalfSwitch*>::iterator vit = validatorSwitches->begin();
+	for(wxList::iterator mit = modControls->begin();
+		mit != modControls->end();
+		mit++, vit++){
+		if(wxCheckBox* control = wxDynamicCast((*mit),wxCheckBox)){
+			(*vit) = new HalfSwitch(control->GetName().ToStdString(),control->GetValue());
+			control->SetValidator(wxGenericValidator(&((*vit)->bval)));
+		}
+		else if(wxRadioButton* control = wxDynamicCast((*mit),wxRadioButton)){
+			(*vit) = new HalfSwitch(control->GetName().ToStdString(),control->GetValue());
+			control->SetValidator(wxGenericValidator(&((*vit)->bval)));
+		}
+		/*if(*vit) {
+			//wxLogMessage(wxString((*vit)->name));
+			wxLogMessage(wxString(std::to_string((*vit)->bval)));
+		}*/
+	}
+	validatorSwitches->ReleaseLock();
+	
 	this->SetMinSize(framesz);
 	this->SetMaxSize(framesz);
 	this->SetSize(framesz);
-}
+
+	menu->Show(true);
+	options->Show(true);
+	
+	pages.at(0)->Show(true);
+	pages.at(0)->SetSize(options->GetClientSize());
+	pages.at(0)->GetSizer()->RecalcSizes();
+	
+
+} //End LauncherFrame constructor
 
 void LauncherFrame::MenuButtonHandler(wxEvent& e){
 	wxButton *b = dynamic_cast<wxButton*>(e.GetEventObject());
@@ -155,8 +176,15 @@ void LauncherFrame::MenuButtonHandler(wxEvent& e){
 			i++)
 			(*i)->Show(false);
 		selectedpage->Show(true);
+		selectedpage->SetSize(options->GetClientSize());
+		selectedpage->GetSizer()->RecalcSizes();
 	}
 	this->Layout();
+	
+	validatorSwitches->AcquireLock();
+	this->TransferDataFromWindow();
+	validatorSwitches->ReleaseLock();
+	
 	e.Skip();
 }
 
@@ -191,7 +219,7 @@ void Launcher::getControls(wxList* list, wxSizer* win){
 }
 void Launcher::getControls(wxList* list, wxWindow* win){
 	if(win == NULL or list == NULL) return;
-    if(dynamic_cast<wxControl*>(win)) {
+    if(win->IsKindOf(wxCLASSINFO(wxControl))) {
         list->Append(win);
     }
     else {

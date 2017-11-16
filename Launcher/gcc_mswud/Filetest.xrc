@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1">
+
+	<object class="wxObject" name="red">
+		<meta>
+			<file_prefix>testfile.txt</file_prefix>
+			<regex>(Hi there)</regex>
+			<repstr>\1$value</repstr>
+		</meta>
+	</object>
+
+	<object class="wxObject" name="blue">
+		<meta>
+			<file_prefix>testfile.txt</file_prefix>
+			<regex>(Good )(?=bye)</regex>
+			<repstr>\1$value</repstr>
+		</meta>
+	</object>
+
+	<object class="wxObject" name="green">
+		<meta>
+			<file_prefix>testfile.txt</file_prefix>
+			<regex>(Hithere)</regex>
+			<repstr>I changed the text</repstr>
+		</meta>
+	</object>
+</resource>

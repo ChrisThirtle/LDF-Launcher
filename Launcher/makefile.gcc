@@ -244,8 +244,11 @@ clean:
 $(OBJS)\launcher.exe: $(launcher_OBJECTS)
 	$(CXX) -o $@ $(launcher_OBJECTS)  $(__DEBUGINFO) $(__THREADSFLAG) -L$(LIBDIRNAME) -Wl,--subsystem,windows -mwindows $(____CAIRO_LIBDIR_FILENAMES_p) $(LDFLAGS)  $(__WXLIB_XRC_p)  $(__WXLIB_HTML_p)  $(__WXLIB_ADV_p)  $(__WXLIB_CORE_p)  $(__WXLIB_XML_p)  $(__WXLIB_BASE_p)  $(__WXLIB_MONO_p) $(__LIB_SCINTILLA_IF_MONO_p)  $(__LIB_JPEG_p) $(__LIB_PNG_p) -lwxzlib$(WXDEBUGFLAG) -lwxregex$(WXUNICODEFLAG)$(WXDEBUGFLAG) -lwxexpat$(WXDEBUGFLAG) $(EXTRALIBS_FOR_BASE) $(__UNICOWS_LIB_p) $(__CAIRO_LIB_p) -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet
 
+$(OBJS)\filet.exe: $(launcher_OBJECTS) $(OBJS)\direc_direc.o $(OBJS)\files_files.o
+	$(CXX) -o $@ $(OBJS)\direc_direc.o $(OBJS)\switch_switch.o $(OBJS)\xmlparse_xmlparse.o $(OBJS)\files_files.o  $(__DEBUGINFO) $(__THREADSFLAG) -L$(LIBDIRNAME) -Wl,--subsystem,windows -mwindows $(____CAIRO_LIBDIR_FILENAMES_p) $(LDFLAGS)  $(__WXLIB_XRC_p)  $(__WXLIB_HTML_p)  $(__WXLIB_ADV_p)  $(__WXLIB_CORE_p)  $(__WXLIB_XML_p)  $(__WXLIB_BASE_p)  $(__WXLIB_MONO_p) $(__LIB_SCINTILLA_IF_MONO_p)  $(__LIB_JPEG_p) $(__LIB_PNG_p) -lwxzlib$(WXDEBUGFLAG) -lwxregex$(WXUNICODEFLAG)$(WXDEBUGFLAG) -lwxexpat$(WXDEBUGFLAG) $(EXTRALIBS_FOR_BASE) $(__UNICOWS_LIB_p) $(__CAIRO_LIB_p) -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet
+	
 $(OBJS)\launcher_launcher.o: .\launcher.cpp
-	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
+	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) -std=c++11 $<
 
 $(OBJS)\xmlparse_xmlparse.o: .\xmlparser.cpp
 	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
@@ -254,10 +257,14 @@ $(OBJS)\drawpanel_drawpanel.o: .\drawpanel.cpp
 	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
 	
 $(OBJS)\switch_switch.o: .\switch.cpp
-	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
+	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) -std=c++11 $<
 	
 $(OBJS)\files_files.o: .\fileeditor.cpp
 	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) -std=c++11 $<
+	
+$(OBJS)\direc_direc.o: .\direc\direc.cpp
+	$(CXX) -w -c -o $@ $(launcher_CXXFLAGS) $(CPPDEPS) $<
+	
 .PHONY: all clean
 
 

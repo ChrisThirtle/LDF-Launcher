@@ -12,20 +12,18 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  C:/TDM-GCC-32/include/limits.h wxWidgets\include/wx/chartype.h \
  C:/TDM-GCC-32/include/wchar.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdarg.h \
- C:/TDM-GCC-32/include/wctype.h C:/TDM-GCC-32/include/sys/types.h \
- C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdint.h \
- C:/TDM-GCC-32/include/stdint.h C:/TDM-GCC-32/include/string.h \
+ C:/TDM-GCC-32/include/wctype.h C:/TDM-GCC-32/include/string.h \
  C:/TDM-GCC-32/include/ctype.h C:/TDM-GCC-32/include/tchar.h \
- wxWidgets\include/wx/windowid.h wxWidgets\include/wx/msw/winundef.h \
- wxWidgets\include/wx/features.h wxWidgets\include/wx/wx.h \
- wxWidgets\include/wx/object.h wxWidgets\include/wx/memory.h \
- wxWidgets\include/wx/string.h C:/TDM-GCC-32/include/stdio.h \
- C:/TDM-GCC-32/include/stdlib.h wxWidgets\include/wx/wxcrtbase.h \
- C:/TDM-GCC-32/include/time.h C:/TDM-GCC-32/include/io.h \
- wxWidgets\include/wx/strvararg.h wxWidgets\include/wx/strconv.h \
- wxWidgets\include/wx/buffer.h wxWidgets\include/wx/fontenc.h \
- wxWidgets\include/wx/unichar.h wxWidgets\include/wx/stringimpl.h \
- wxWidgets\include/wx/beforestd.h \
+ C:/TDM-GCC-32/include/sys/types.h wxWidgets\include/wx/windowid.h \
+ wxWidgets\include/wx/msw/winundef.h wxWidgets\include/wx/features.h \
+ wxWidgets\include/wx/wx.h wxWidgets\include/wx/object.h \
+ wxWidgets\include/wx/memory.h wxWidgets\include/wx/string.h \
+ C:/TDM-GCC-32/include/stdio.h C:/TDM-GCC-32/include/stdlib.h \
+ wxWidgets\include/wx/wxcrtbase.h C:/TDM-GCC-32/include/time.h \
+ C:/TDM-GCC-32/include/io.h wxWidgets\include/wx/strvararg.h \
+ wxWidgets\include/wx/strconv.h wxWidgets\include/wx/buffer.h \
+ wxWidgets\include/wx/fontenc.h wxWidgets\include/wx/unichar.h \
+ wxWidgets\include/wx/stringimpl.h wxWidgets\include/wx/beforestd.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/string \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++config.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/os_defines.h \
@@ -42,6 +40,7 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_pair.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/move.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/concept_check.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/type_traits \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_iterator_base_types.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_iterator_base_funcs.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/debug/debug.h \
@@ -50,12 +49,17 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/predefined_ops.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/postypes.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cwchar \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdint \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdint.h \
+ C:/TDM-GCC-32/include/stdint.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/allocator.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++allocator.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/new_allocator.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/new \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/exception \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/atomic_lockfree_defines.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/exception_ptr.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/nested_exception.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/localefwd.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++locale.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/clocale \
@@ -67,6 +71,7 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_function.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/backward/binders.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/range_access.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/initializer_list \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/basic_string.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/atomicity.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/gthr.h \
@@ -77,26 +82,33 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  C:/TDM-GCC-32/include/pthread_unistd.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/atomic_word.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/alloc_traits.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/alloc_traits.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/string_conversions.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdlib \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cerrno \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/functional_hash.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hash_bytes.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/basic_string.tcc \
- wxWidgets\include/wx/afterstd.h \
- C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/tr1/type_traits \
- wxWidgets\include/wx/stringops.h wxWidgets\include/wx/iosfwrap.h \
- wxWidgets\include/wx/crt.h wxWidgets\include/wx/wxcrt.h \
- wxWidgets\include/wx/wxcrtvararg.h wxWidgets\include/wx/msgout.h \
- wxWidgets\include/wx/xti.h wxWidgets\include/wx/rtti.h \
- wxWidgets\include/wx/flags.h wxWidgets\include/wx/xti2.h \
- wxWidgets\include/wx/dynarray.h wxWidgets\include/wx/list.h \
- wxWidgets\include/wx/vector.h wxWidgets\include/wx/scopeguard.h \
- wxWidgets\include/wx/except.h wxWidgets\include/wx/meta/movable.h \
- wxWidgets\include/wx/meta/pod.h wxWidgets\include/wx/meta/if.h \
- wxWidgets\include/wx/hash.h wxWidgets\include/wx/hashmap.h \
- wxWidgets\include/wx/arrstr.h \
+ wxWidgets\include/wx/afterstd.h wxWidgets\include/wx/stringops.h \
+ wxWidgets\include/wx/iosfwrap.h wxWidgets\include/wx/crt.h \
+ wxWidgets\include/wx/wxcrt.h wxWidgets\include/wx/wxcrtvararg.h \
+ wxWidgets\include/wx/msgout.h wxWidgets\include/wx/xti.h \
+ wxWidgets\include/wx/rtti.h wxWidgets\include/wx/flags.h \
+ wxWidgets\include/wx/xti2.h wxWidgets\include/wx/dynarray.h \
+ wxWidgets\include/wx/list.h wxWidgets\include/wx/vector.h \
+ wxWidgets\include/wx/scopeguard.h wxWidgets\include/wx/except.h \
+ wxWidgets\include/wx/meta/movable.h wxWidgets\include/wx/meta/pod.h \
+ wxWidgets\include/wx/meta/if.h wxWidgets\include/wx/hash.h \
+ wxWidgets\include/wx/hashmap.h wxWidgets\include/wx/arrstr.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/iterator \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ostream \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ios \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/ios_base.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/locale_classes.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/locale_classes.tcc \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/system_error \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/error_constants.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/stdexcept \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/streambuf \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/streambuf.tcc \
@@ -118,11 +130,13 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  wxWidgets\include/wx/thread.h wxWidgets\include/wx/generic/logg.h \
  wxWidgets\include/wx/event.h wxWidgets\include/wx/clntdata.h \
  wxWidgets\include/wx/gdicmn.h wxWidgets\include/wx/math.h \
- C:/TDM-GCC-32/include/math.h wxWidgets\include/wx/cursor.h \
- wxWidgets\include/wx/msw/cursor.h wxWidgets\include/wx/msw/gdiimage.h \
- wxWidgets\include/wx/gdiobj.h wxWidgets\include/wx/utils.h \
- wxWidgets\include/wx/filefn.h C:/TDM-GCC-32/include/sys/stat.h \
- C:/TDM-GCC-32/include/fcntl.h wxWidgets\include/wx/versioninfo.h \
+ C:/TDM-GCC-32/include/math.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cmath \
+ wxWidgets\include/wx/cursor.h wxWidgets\include/wx/msw/cursor.h \
+ wxWidgets\include/wx/msw/gdiimage.h wxWidgets\include/wx/gdiobj.h \
+ wxWidgets\include/wx/utils.h wxWidgets\include/wx/filefn.h \
+ C:/TDM-GCC-32/include/sys/stat.h C:/TDM-GCC-32/include/fcntl.h \
+ wxWidgets\include/wx/versioninfo.h \
  wxWidgets\include/wx/meta/implicitconversion.h \
  wxWidgets\include/wx/mousestate.h wxWidgets\include/wx/kbdstate.h \
  wxWidgets\include/wx/longlong.h \
@@ -240,10 +254,54 @@ gcc_mswud\launcher_launcher.o: launcher.cpp launcher.h \
  wxWidgets\include/wx/filesys.h wxWidgets\include/wx/filename.h \
  wxWidgets\include/wx/file.h wxWidgets\include/wx/convauto.h \
  wxWidgets\include/wx/artprov.h wxWidgets\include/wx/xrc/xmlreshandler.h \
- xmlparser.h wxWidgets\include/wx/xml/xml.h drawpanel.h \
+ wxWidgets\include/wx/valgen.h cereal/archives/portable_binary.hpp \
+ cereal/cereal.hpp C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/memory \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_construct.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_uninitialized.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_tempbuf.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_raw_storage_iter.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/concurrence.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/uses_allocator.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/functional \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/tuple \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/utility \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_relops.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/array \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unique_ptr.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr_base.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/allocated_ptr.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/aligned_buffer.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr_atomic.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/atomic_base.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/backward/auto_ptr.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/unordered_map \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hashtable.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hashtable_policy.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unordered_map.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/unordered_set \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unordered_set.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/vector \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_vector.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_bvector.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/vector.tcc \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstddef \
+ cereal/macros.hpp cereal/details/traits.hpp \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/typeindex \
+ cereal/access.hpp cereal/details/helpers.hpp \
+ cereal/details/static_object.hpp cereal/types/base_class.hpp \
+ cereal/details/polymorphic_impl_fwd.hpp cereal/types/common.hpp \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/sstream \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/sstream.tcc \
+ xmlparser.h wxWidgets\include/wx/xml/xml.h drawpanel.h threading.h \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mutex \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/chrono \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ratio \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ctime \
+ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/parse_numbers.h \
+ switch.h wxWidgets\include/wx/regex.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/fstream \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/codecvt.h \
- C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/basic_file.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++io.h \
  C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/fstream.tcc
@@ -294,17 +352,13 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdarg.h:
 
 C:/TDM-GCC-32/include/wctype.h:
 
-C:/TDM-GCC-32/include/sys/types.h:
-
-C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdint.h:
-
-C:/TDM-GCC-32/include/stdint.h:
-
 C:/TDM-GCC-32/include/string.h:
 
 C:/TDM-GCC-32/include/ctype.h:
 
 C:/TDM-GCC-32/include/tchar.h:
+
+C:/TDM-GCC-32/include/sys/types.h:
 
 wxWidgets\include/wx/windowid.h:
 
@@ -376,6 +430,8 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/move.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/concept_check.h:
 
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/type_traits:
+
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_iterator_base_types.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_iterator_base_funcs.h:
@@ -392,6 +448,12 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/postypes.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cwchar:
 
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdint:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/stdint.h:
+
+C:/TDM-GCC-32/include/stdint.h:
+
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/allocator.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/c++allocator.h:
@@ -403,6 +465,10 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/new:
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/exception:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/atomic_lockfree_defines.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/exception_ptr.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/nested_exception.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/localefwd.h:
 
@@ -425,6 +491,8 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_function.h:
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/backward/binders.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/range_access.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/initializer_list:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/basic_string.h:
 
@@ -452,11 +520,23 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/atomic_word.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/alloc_traits.h:
 
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/alloc_traits.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/string_conversions.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdlib:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cerrno:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/functional_hash.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hash_bytes.h:
+
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/basic_string.tcc:
 
 wxWidgets\include/wx/afterstd.h:
-
-C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/tr1/type_traits:
 
 wxWidgets\include/wx/stringops.h:
 
@@ -511,6 +591,10 @@ C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/ios_base.h:
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/locale_classes.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/locale_classes.tcc:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/system_error:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/error_constants.h:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/stdexcept:
 
@@ -567,6 +651,8 @@ wxWidgets\include/wx/gdicmn.h:
 wxWidgets\include/wx/math.h:
 
 C:/TDM-GCC-32/include/math.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cmath:
 
 wxWidgets\include/wx/cursor.h:
 
@@ -1032,17 +1118,121 @@ wxWidgets\include/wx/artprov.h:
 
 wxWidgets\include/wx/xrc/xmlreshandler.h:
 
+wxWidgets\include/wx/valgen.h:
+
+cereal/archives/portable_binary.hpp:
+
+cereal/cereal.hpp:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/memory:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_construct.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_uninitialized.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_tempbuf.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_raw_storage_iter.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/concurrence.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/uses_allocator.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/functional:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/tuple:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/utility:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_relops.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/array:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unique_ptr.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr_base.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/allocated_ptr.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ext/aligned_buffer.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/shared_ptr_atomic.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/atomic_base.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/backward/auto_ptr.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/unordered_map:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hashtable.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/hashtable_policy.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unordered_map.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/unordered_set:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/unordered_set.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/vector:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_vector.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/stl_bvector.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/vector.tcc:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstddef:
+
+cereal/macros.hpp:
+
+cereal/details/traits.hpp:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/typeindex:
+
+cereal/access.hpp:
+
+cereal/details/helpers.hpp:
+
+cereal/details/static_object.hpp:
+
+cereal/types/base_class.hpp:
+
+cereal/details/polymorphic_impl_fwd.hpp:
+
+cereal/types/common.hpp:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/sstream:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/sstream.tcc:
+
 xmlparser.h:
 
 wxWidgets\include/wx/xml/xml.h:
 
 drawpanel.h:
 
+threading.h:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mutex:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/chrono:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ratio:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/ctime:
+
+C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/parse_numbers.h:
+
+switch.h:
+
+wxWidgets\include/wx/regex.h:
+
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/fstream:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/bits/codecvt.h:
-
-C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/cstdio:
 
 C:/TDM-GCC-32/lib/gcc/mingw32/5.1.0/include/c++/mingw32/bits/basic_file.h:
 

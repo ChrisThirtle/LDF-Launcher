@@ -3,6 +3,8 @@
 
 #include <string>
 #include "wx/regex.h"
+#include "cereal/archives/portable_binary.hpp"
+
 
 #define REGEXFLAGS wxRE_DEFAULT
 
@@ -15,6 +17,7 @@ class HalfSwitch {
 		bool bval;
 		int ival;
 	};
+	HalfSwitch();
 	HalfSwitch(std::string nm,char tp);
 	HalfSwitch(std::string nm,HalfSwitch::SwitchType tp);
 	HalfSwitch(std::string nm,bool val);
@@ -22,16 +25,25 @@ class HalfSwitch {
 	HalfSwitch(const HalfSwitch& old);
 	
 	bool Equals(const HalfSwitch& other);
+	
+	template<class Archive>
+	void serialize(Archive &archive){
+		archive(name,type,ival);
+	};
 };
 
 class FullSwitch : public HalfSwitch {
+	private:
+	std::string regstr;
 	public:
 	std::string ftarget;
-	wxRegEx regstr;
+	
 	std::string repstr;
 	
-	FullSwitch(HalfSwitch half,std::string filename, std::string regstring, std::string replace);
+	FullSwitch(HalfSwitch& half,std::string filename, std::string regstring, std::string replace);
 	FullSwitch(const FullSwitch& other);
+	
+	wxRegEx* GetRegex();
 };
 
 

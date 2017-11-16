@@ -1,7 +1,7 @@
 Launcher/wxWidgets/**
 Launcher/rapidxml/**
 Launcher/wxWidgets
-Launcher/rapidxml
+Launcher/cereal/
 
 *.o
 *.exe

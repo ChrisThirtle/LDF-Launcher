@@ -1,14 +1,74 @@
 #include "fileeditor.h"
 
-#define RAWS_PATH "stuff"
-#define INIT_PATH "thing"
+#define LDFTEST 1
+#define RAWS_PATH ""
+#define INIT_PATH ""
 
-#if LDFTHREADED==0 //Single threaded file editing, first implementation
-EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitch> *editsource) {
-	Directory::Iterator dir;
-	std::vector<std::string> files;
+#define XML_SOURCE "Filetest.xrc"
+
+class tester : public wxApp {
+	private:
+	std::future<int> endManager;
+	public:
+	virtual bool OnInit();
+};
+
+IMPLEMENT_APP(tester);
+
+#if LDFTEST==1
+
+
+bool tester::OnInit(){
+    if ( !wxApp::OnInit() )
+        return false;
+		
+	wxFrame *frm = new wxFrame(NULL, wxID_ANY, "TEST");
+	frm->Show(true);
 	
+	wxXmlResource::Get()->InitAllHandlers();
+	wxXmlResource::Get()->Load(XML_SOURCE);
+	
+	wxLogMessage("Loaded at all");
+	
+	MutexVector<HalfSwitch> source;
+	source.AcquireLock();
+	source.emplace_back("red",true);
+	source.emplace_back("green",false);
+	source.emplace_back("blue",true);
+	source.ReleaseLock();
+	
+	wxLogMessage("Filled the source vector");
+	
+	std::promise<bool> prom;
+	std::future<bool> fut(prom.get_future());
+	
+	wxLogMessage("Created future and promise");
+
+	endManager  = std::async(std::launch::async,
+									&EditorManager::AsyncManager,
+									std::move(fut), &source);
+									
+	std::this_thread::sleep_for(std::chrono::seconds(4));
+	wxLogMessage("Spawned async thread");
+	
+	
+	source.AcquireLock();
+	source[0].bval = false;
+	source[1].bval = true;
+	source.ReleaseLock();
+	
+	wxLogMessage("Messed with the values");
+	
+	
+	return true;
+}
+#endif
+
+std::vector<std::string> EditorManager::GetFiles() {
 	//Collect files for editor to deal with
+	Directory::Iterator dir;
+	
+	std::vector<std::string> files;
 	dir.changeDirectory(RAWS_PATH);
 	try {
 		while(true){
@@ -29,15 +89,20 @@ EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitc
 	}
 	catch (std::out_of_range e){};
 	
+	return files;
+}
+
+std::vector<FullSwitch> EditorManager::GetFullSwitches(MutexVector<HalfSwitch> *halfsw) {
 	//Collect the full switches for the controls;
-	std::vector<FullSwitch> editdest;
-	editsource->AcquireLock();
-	for(std::vector<HalfSwitch>::iterator it = editsource->begin();
-		it != editsource->end();
+	std::vector<FullSwitch> fullsw;
+	halfsw->AcquireLock();
+	for(std::vector<HalfSwitch>::iterator it = halfsw->begin();
+		it != halfsw->end();
 		it++){
 		std::string regexstring = "";
 		std::string replacestring = "";
 		std::string targetfile = "";
+		
 		wxXmlNode* metadata = XmlParser::getMeta((*it).name)->GetChildren();
 		while(metadata != NULL) {
 			if(metadata->GetName().Lower() == "regex")
@@ -46,16 +111,29 @@ EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitc
 				replacestring = metadata->GetNodeContent();
 			else if(metadata->GetName().Lower() == "file_prefix")
 				targetfile = metadata->GetNodeContent();
-		
-		editdest.emplace_back((*it),targetfile,regexstring,replacestring);
+			metadata = metadata->GetNext();
 		}
+		fullsw.emplace_back((*it),targetfile,regexstring,replacestring);
 	}
-	editsource->ReleaseLock();
+	halfsw->ReleaseLock();
+	return fullsw;
+}
+
+#if LDFTHREADED==0 //Single threaded file editing, first implementation
+int EditorManager::AsyncManager(std::future<bool> endManager, MutexVector<HalfSwitch>* editsource){
+	EditorManager ed = EditorManager(std::move(endManager),editsource);
+	return 1;
+}
+
+EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitch> *editsource) {
 	
+	std::vector<std::string> files = EditorManager::GetFiles();
+	std::vector<FullSwitch> editdest = EditorManager::GetFullSwitches(editsource);
+
 	//Begin editing files in loop
 	std::vector<FullSwitch> editdiffs;
 	while(endManager.wait_for(std::chrono::seconds::zero()) != std::future_status::ready){ //While you've not been told to exit, edit files
-	
+		
 		editsource->AcquireLock();							//Lock switch list
 		for(int it = 0; it < editdest.size(); it++){		//For each switch
 			if(not (*editsource)[it].Equals(editdest[it]))		//Compare current switches to previous switches
@@ -64,36 +142,67 @@ EditorManager::EditorManager(std::future<bool> endManager, MutexVector<HalfSwitc
 		}
 		editsource->ReleaseLock();							//Release switch list lock
 		
+		EditorManager::ModifyFiles(files,editdiffs);
+	}
+}
+
+
+
+void EditorManager::ModifyFiles(std::vector<std::string>& files, std::vector<FullSwitch>& diffs){
+	for(std::vector<std::string>::iterator it = files.begin();	//For each file to be edited
+		it != files.end();
+		it++){
+		std::fstream currfile;
+		std::string filetext;
 		
-		for(std::vector<std::string>::iterator it = files.begin();	//For each file to be edited
-			it != files.end();
-			it++){
-			std::fstream currfile;
-			std::string filetext;
+		//Read file contents
+		currfile.open(*it,std::ios_base::in);
+		std::copy(std::istream_iterator<char>(currfile),
+				  std::istream_iterator<char>(),
+				  std::back_inserter(filetext));
+		currfile.close();
+		
+		wxString fstring(filetext);
+		
+		//Modify file contents
+		for(std::vector<FullSwitch>::iterator control = diffs.begin();
+			control != diffs.end();
+			control++){
+			wxString replacestring;
+			int pos;
+			while(std::string::npos != (pos = (*control).repstr.find("&value"))) { //Replace all "&value"s in repstr
+				if((*control).type == HalfSwitch::BOOLEAN){ //For boolean controls
+					if((*control).bval == true)
+						replacestring = wxString( (*control).repstr.replace(pos, 6, "[") ); //If true, activate controls
+					else
+						replacestring = wxString( (*control).repstr.replace(pos, 6, "!") ); //If false, deactivate controls
+				}
+				else { //For integer controls
+					replacestring = wxString( (*control).repstr.replace(pos, 6, std::string::to_string((*control).ival) ); //If integer control, replace with ival.
+				}
+			}
+			while(std::string::npos != (pos = (*control).repstr.find("&nvalue"))) { //Replace all "&nvalue"s in repstr
+				if((*control).type == HalfSwitch::BOOLEAN){ //For boolean controls
+					if((*control).bval == true)
+						replacestring = wxString( (*control).repstr.replace(pos, 7, "!") ); //If true, deactivate controls
+					else
+						replacestring = wxString( (*control).repstr.replace(pos, 7, "[") ); //If false, activate controls
+				}
+				else { //For integer controls, &nvalue == &value meaning-wise
+					replacestring = wxString( (*control).repstr.replace(pos, 7, std::string::to_string((*control).ival) );
+				}
+			}
 			
-			//Read file contents
-			currfile.open(*it,std::ios_base::in);
-			std::copy(std::istream_iterator<char>(currfile),
-			     	  std::istream_iterator<char>(),
-				      std::back_inserter(filetext));
-			currfile.close();
+			(*control).GetRegex()->ReplaceAll(&fstring,replacestring);
 			
-			wxString fstring(filetext);
-			
-			//Modify file contents
-			for(std::vector<FullSwitch>::iterator control = editdiffs.begin();
-				control != editdiffs.end();
-				control++){
-				(*control).regstr.ReplaceAll(&fstring,wxString((*control).repstr));
-			
-			filetext = fstring.ToStdString();
-			//Rewrite file
-			currfile.open(*it,std::ios_base::out | std::ios_base::trunc);
-			currfile << filetext;
-			currfile.close();
-			} //End for
 		} //End for
-	} //End while
+		
+		filetext = fstring.ToStdString();
+		//Rewrite file
+		currfile.open(*it,std::ios_base::out | std::ios_base::trunc);
+		currfile << filetext;
+		currfile.close();
+	} //End for
 }
 
 #elif LDFTHREADED==1 //Simple multithreading, not too smart

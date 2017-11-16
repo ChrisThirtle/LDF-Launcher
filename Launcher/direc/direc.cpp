@@ -40,11 +40,14 @@ std::string Directory::Iterator::getDirPath() {
 	
 	GetCurrentDirectory(sz, charbuff);
 	outStr.assign(charbuff);
+	outStr.push_back('\\');
 	delete charbuff;
 	return outStr;
 }
 
 void Directory::Iterator::changeDirectory(char* newDir) {
+	if(std::string("").compare(newDir) == 0)
+		return; //If newDir is an empty string, don't do anything
 	resetPos();
 	std::string dirStr = newDir;
 	if(dirStr.data()[dirStr.size()-1] != '\\')
@@ -53,6 +56,9 @@ void Directory::Iterator::changeDirectory(char* newDir) {
 }
 
 void Directory::Iterator::changeDirectory(std::string newDir) {
+	if(std::string("").compare(newDir) == 0)
+		return; //If newDir is an empty string, don't do anything
+	resetPos();
 	std::string dirStr = newDir;
 	if(dirStr.data()[dirStr.size()-1] != '\\')
 		dirStr.push_back('\\'); //Ensure the new name ends with a backslash
@@ -90,16 +96,21 @@ std::string Directory::Iterator::getNextFilename() {
 std::string Directory::Iterator::getDirPath() {
 	std::string outStr;
 	outStr.assign(getchwd(NULL,0));
+	outStr.push_back('\\');
 	return outStr;
 }
 
 void Directory::Iterator::changeDirectory(char* newDir) {
+	if(std::string("").compare(newDir) == 0)
+		return; //If newDir is an empty string, don't do anything
 	closedir(dp);
 	chdir(newDir);
 	dp = opendir(".");
 }
 
 void Directory::Iterator::changeDirectory(std::string newDir) {
+	if(std::string("").compare(newDir) == 0)
+		return; //If newDir is an empty string, don't do anything
 	closedir(dp);
 	chdir(newDir.c_str());
 	dp = opendir(".");

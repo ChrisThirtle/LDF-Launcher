@@ -14,10 +14,16 @@
 #include "wx/vector.h"
 #include "wx/xrc/xmlres.h"
 #include "wx/colour.h"
+#include "wx/valgen.h"
+
+//Include additional libraries
+#include "cereal/archives/portable_binary.hpp"
 
 //Include selfmade libraries
 #include "xmlparser.h"
 #include "drawpanel.h"
+#include "threading.h"
+#include "switch.h"
 
 //Include standard libraries
 #include <fstream>
@@ -28,14 +34,15 @@
 
 class Launcher : public wxApp {
 private:
-	wxList* getControls(wxWindow* win);
-	void getControls(wxList* list, wxWindow* win);
-	wxList* getControls(wxSizer* win);
-	void getControls(wxList* list, wxSizer* win);
+	
+	static void getControls(wxList* list, wxWindow* win);
+	
+	static void getControls(wxList* list, wxSizer* win);
 	
 	
 public:
-	
+	static wxList* getControls(wxWindow* win);
+	static wxList* getControls(wxSizer* win);
 	virtual bool OnInit();
 };
 
@@ -44,6 +51,8 @@ class LauncherFrame : public wxFrame {
 private:
 	wxPanel *menu;
 	wxPanel *options;
+	
+	MutexVector<HalfSwitch*>* validatorSwitches;
 	
 	void MenuButtonHandler(wxEvent& e);
 	void LaunchDF(wxEvent& e);

@@ -1,5 +1,6 @@
 #include "switch.h"
 
+HalfSwitch::HalfSwitch() {};
 HalfSwitch::HalfSwitch(std::string nm,char tp){
 	name = nm;
 	type = tp==0?HalfSwitch::BOOLEAN:HalfSwitch::INTEGER;
@@ -31,9 +32,9 @@ bool HalfSwitch::Equals(const HalfSwitch& other){
 		return ival==other.ival?false:true;
 }
 
-FullSwitch::FullSwitch (HalfSwitch half, std::string filename, std::string regstring, std::string replace) : HalfSwitch(half) {
+FullSwitch::FullSwitch (HalfSwitch& half, std::string filename, std::string regstring, std::string replace) : HalfSwitch(half) {
 	ftarget = filename;
-	regstr.Compile(regstring,REGEXFLAGS);
+	regstr = regstring;
 	repstr = replace;
 }
 FullSwitch::FullSwitch(const FullSwitch& other){
@@ -44,3 +45,8 @@ FullSwitch::FullSwitch(const FullSwitch& other){
 	regstr = other.regstr;
 	repstr = other.repstr;
 }
+
+wxRegEx* FullSwitch::GetRegex(){
+	return new wxRegEx(regstr,wxRE_ADVANCED);
+}
+
